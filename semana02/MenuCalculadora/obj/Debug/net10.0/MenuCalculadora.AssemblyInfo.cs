@@ -10,12 +10,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("ClasificadorNotas")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("MenuCalculadora")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+51e64d61fb481da81c88127552ed6d68b5519681")]
-[assembly: System.Reflection.AssemblyProductAttribute("ClasificadorNotas")]
-[assembly: System.Reflection.AssemblyTitleAttribute("ClasificadorNotas")]
+[assembly: System.Reflection.AssemblyProductAttribute("MenuCalculadora")]
+[assembly: System.Reflection.AssemblyTitleAttribute("MenuCalculadora")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Generato dalla classe WriteCodeFragment di MSBuild.

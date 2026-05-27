@@ -1,0 +1,15 @@
+/Users/akemic/workspaces/fundamentos-algoritmos-upn/semana02/MenuCalculadora/bin/Debug/net10.0/MenuCalculadora
+/Users/akemic/workspaces/fundamentos-algoritmos-upn/semana02/MenuCalculadora/bin/Debug/net10.0/MenuCalculadora.deps.json
+/Users/akemic/workspaces/fundamentos-algoritmos-upn/semana02/MenuCalculadora/bin/Debug/net10.0/MenuCalculadora.runtimeconfig.json
+/Users/akemic/workspaces/fundamentos-algoritmos-upn/semana02/MenuCalculadora/bin/Debug/net10.0/MenuCalculadora.dll
+/Users/akemic/workspaces/fundamentos-algoritmos-upn/semana02/MenuCalculadora/bin/Debug/net10.0/MenuCalculadora.pdb
+/Users/akemic/workspaces/fundamentos-algoritmos-upn/semana02/MenuCalculadora/obj/Debug/net10.0/MenuCalculadora.GeneratedMSBuildEditorConfig.editorconfig
+/Users/akemic/workspaces/fundamentos-algoritmos-upn/semana02/MenuCalculadora/obj/Debug/net10.0/MenuCalculadora.AssemblyInfoInputs.cache
+/Users/akemic/workspaces/fundamentos-algoritmos-upn/semana02/MenuCalculadora/obj/Debug/net10.0/MenuCalculadora.AssemblyInfo.cs
+/Users/akemic/workspaces/fundamentos-algoritmos-upn/semana02/MenuCalculadora/obj/Debug/net10.0/MenuCalculadora.csproj.CoreCompileInputs.cache
+/Users/akemic/workspaces/fundamentos-algoritmos-upn/semana02/MenuCalculadora/obj/Debug/net10.0/MenuCalculadora.sourcelink.json
+/Users/akemic/workspaces/fundamentos-algoritmos-upn/semana02/MenuCalculadora/obj/Debug/net10.0/MenuCalculadora.dll
+/Users/akemic/workspaces/fundamentos-algoritmos-upn/semana02/MenuCalculadora/obj/Debug/net10.0/refint/MenuCalculadora.dll
+/Users/akemic/workspaces/fundamentos-algoritmos-upn/semana02/MenuCalculadora/obj/Debug/net10.0/MenuCalculadora.pdb
+/Users/akemic/workspaces/fundamentos-algoritmos-upn/semana02/MenuCalculadora/obj/Debug/net10.0/MenuCalculadora.genruntimeconfig.cache
+/Users/akemic/workspaces/fundamentos-algoritmos-upn/semana02/MenuCalculadora/obj/Debug/net10.0/ref/MenuCalculadora.dll
