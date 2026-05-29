@@ -5,14 +5,14 @@ Console.Write("Ingrese la nota del estudiante: ");
 string? input = Console.ReadLine();
 if (double.TryParse(input, out double voto))
 {
-    ClasificarNota(voto);
+    ClassificareVoto(voto);
 }
 else
 {
     Console.WriteLine("Entrada no válida. Ingrese un número.");
 }
 
-static void ClasificarNota(double voto)
+static void ClassificareVoto(double voto)
 {
 
     if (voto < 0 || voto > 20)
