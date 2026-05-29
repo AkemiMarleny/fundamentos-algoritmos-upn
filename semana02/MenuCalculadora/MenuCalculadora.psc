@@ -1,89 +1,50 @@
-Proceso Main
-	Escribir "MENÚ DE CALCULADORA"
+Algoritmo MenuCalculadora
+    // 1. Declaración de variables esenciales
+    Definir num1, num2, risultato Como Real
+    Definir operazione Como Entero
+    
+    Escribir "=== MENÚ DE CALCULADORA ==="
+    
+    // 2. Lectura de los números
+    Escribir "Ingrese el primer número:"
+    Leer num1
+    Escribir "Ingrese el segundo número:"
+    Leer num2
+    
+    // 3. Mostrar opciones del menú por primera vez
+    Escribir "Seleccione la operación:"
+    Escribir "1. Suma"
+    Escribir "2. Resta"
+    Escribir "3. Multiplicación"
+    Escribir "4. División"
+    Escribir "Opción (1-4): "
+    Leer operazione
 
-	Definir num1 Como Real;
-	Definir num2 Como Real;
-	Definir operacion Como Entero;
+    // Mientras la opción NO sea válida (menor que 1 o mayor que 4)
+    Mientras operazione < 1 O operazione > 4 Hacer
+        Escribir "Opción no válida. Por favor, seleccione una opción del 1 al 4."
+        Escribir "Opción: "
+        Leer operazione
+    FinMientras
 
-	num1 <- leerNumero("Ingrese el primer número:")
-	num2 <- leerNumero("Ingrese el segundo número:")
-
-	Escribir "Seleccione la operación:"
-	Escribir "1. Suma"
-	Escribir "2. Resta"
-	Escribir "3. Multiplicación"
-	Escribir "4. División"
-
-	Escribir "Opción: "
-	Leer operacion
-
-	realizarOperacion(num1, num2, operacion)
-FinProceso
-
-SubProceso r <- realizarOperacion(num1, num2, operacion)
-	Definir r Como Real
-
-	Segun operacion Hacer
-		1: Escribir "Resultado: ", num1, " + ", num2, " = ", (num1 + num2);
-		2: Escribir "Resultado: ", num1, " - ", num2, " = ", (num1 - num2);
-		3: Escribir "Resultado: ", num1, " * ", num2, " = ", (num1 * num2);
-		4: dividir(num1, num2)
-		De Otro Modo:
-			Escribir "Opción no válida. Por favor, seleccione una opción del 1 al 4."
-	FinSegun
-FinSubProceso 
-
-SubProceso dividir(dividendo, divisor)
-	Si divisor = 0 Entonces
-		Leer divisor
-		dividir(dividendo, divisor)
-	Sino
-		Escribir "Resultado: ", dividendo, " / ", divisor, " = ", (dividendo / divisor)
-	FinSi
-FinSubProceso
-
-Funcion r <- leerNumero(mensaje)
-	Definir input Como Cadena
-
-  	Escribir mensaje
-
-  	Leer input
-	Si esNumero(input) Entonces
-		r <- ConvertirANumero(input)
-	Sino
-		Escribir "Entrada no válida. Por favor, ingrese un número."
-		r <- leerNumero(mensaje)
-	FinSi
-
-FinFuncion
-
-Funcion es_numero <- esNumero(texto_ingresado)
-	Definir caracter_actual Como Cadena
-	Definir largo, i Como Entero
-	Definir es_numero Como Logico
-	Definir cantidad_puntos Como Entero
-
-	
-	largo <- Longitud(texto_ingresado)
-	es_numero <- Verdadero
-	Si largo = 0 Entonces
-        es_numero <- Falso
-    FinSi
-
-	Para i <- 0 Hasta largo - 1 Con Paso 1 Hacer
-        caracter_actual <- Subcadena(texto_ingresado, i + 1, i + 1)
-
-		Si caracter_actual = "." Entonces
-			cantidad_puntos <- cantidad_puntos + 1
-        SiNo
-			Si caracter_actual < "0" O caracter_actual > "9" Entonces
-				es_numero <- Falso // Encontró una letra o símbolo
-			FinSi
-        FinSi
-    FinPara
-
-	Si cantidad_puntos > 1 Entonces
-        es_numero <- Falso
-    FinSi
-
-FinFuncion
+    // 4. Procesar la operación seleccionada
+    Segun operazione Hacer
+        1:
+            risultato <- num1 + num2
+            Escribir "Resultado: ", num1, " + ", num2, " = ", risultato
+        2:
+            risultato <- num1 - num2
+            Escribir "Resultado: ", num1, " - ", num2, " = ", risultato
+        3:
+            risultato <- num1 * num2
+            Escribir "Resultado: ", num1, " * ", num2, " = ", risultato
+        4:
+            Mientras num2 = 0 Hacer
+                Escribir "Error: No se puede dividir entre cero."
+                Escribir "Por favor, ingrese un segundo número válido:"
+                Leer num2
+            FinMientras
+            risultato <- num1 / num2
+            Escribir "Resultado: ", num1, " / ", num2, " = ", risultato
+    FinSegun
+FinAlgoritmo
