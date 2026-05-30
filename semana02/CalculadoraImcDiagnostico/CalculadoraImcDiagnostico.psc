@@ -53,7 +53,7 @@ Mientras NO valido Hacer
             valido <- Verdadero
         Sino
             Escribir "Entrada inválida. Por favor, ingrese un valor válido"
-            Escribir ""
+            
         FinSi
     FinMientras
 FinFuncion
