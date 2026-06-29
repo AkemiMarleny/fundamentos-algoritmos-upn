@@ -60,10 +60,10 @@ class SimuladorTarifa
         double subtotal = tarifaBase + (costokm * distancia);
         bool esHoraPico = false;
 
-        if ((hora >= 7 && hora <= 9) || (hora >= 17 && hora <= 20))
+        esHoraPico = EsHoraPico(hora);
+        if (esHoraPico)
         {
             subtotal = subtotal * 1.30;
-            esHoraPico = true;
         }
 
         double descuento = 0;
@@ -76,6 +76,11 @@ class SimuladorTarifa
         double tarifaFinal = Math.Max(subtotal, 5.00);
         tarifaFinal = Math.Round(tarifaFinal, 2);
 
-        Console.WriteLine("\nTARIFA FINAL: S/ " + tarifaFinal);
+        Console.WriteLine($"\nTARIFA FINAL: S/ {tarifaFinal}");
+    }
+
+    static bool EsHoraPico(int hora)
+    {
+        return (hora >= 7 && hora <= 9) || (hora >= 17 && hora <= 20);
     }
 }
