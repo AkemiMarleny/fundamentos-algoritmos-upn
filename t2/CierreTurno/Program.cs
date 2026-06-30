@@ -26,13 +26,13 @@ class SimuladorTarifa
         Console.Write("Seleccione opción: ");
         int tipoVehiculo = int.Parse(Console.ReadLine());
 
-        double tarifaFinal = CalcularTarifa(distancia, hora, tipoVehiculo);
-
-        if (tarifaFinal < 0)
+        if (!EsValido(distancia, hora, tipoVehiculo))
         {
-            Console.WriteLine("\nOpción no válida. Fin del programa.");
+            Console.WriteLine("\nDatos inválidos.");
             return;
         }
+
+        double tarifaFinal = CalcularTarifa(distancia, hora, tipoVehiculo);
         Console.WriteLine($"\nTARIFA FINAL: S/ {tarifaFinal}");
     }
 
@@ -81,5 +81,12 @@ class SimuladorTarifa
         }
 
         return Math.Round(Math.Max(subtotal, 5.00), 2);
+    }
+
+    static bool EsValido(double distancia, int hora, int tipoVehiculo)
+    {
+        return distancia > 0
+            && hora >= 0 && hora <= 23
+            && tipoVehiculo >= 1 && tipoVehiculo <= 4;
     }
 }
