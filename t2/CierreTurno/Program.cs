@@ -26,61 +26,60 @@ class SimuladorTarifa
         Console.Write("Seleccione opción: ");
         int tipoVehiculo = int.Parse(Console.ReadLine());
 
-        double tarifaBase = 0;
-        double costokm = 0;
-        string nombreVehiculo = "";
+        double tarifaFinal = CalcularTarifa(distancia, hora, tipoVehiculo);
 
-        switch (tipoVehiculo)
+        if (tarifaFinal < 0)
         {
-            case 1:
-                nombreVehiculo = "Económico";
-                tarifaBase = 2.00;
-                costokm = 1.50;
-                break;
-            case 2:
-                nombreVehiculo = "Confort";
-                tarifaBase = 3.00;
-                costokm = 2.00;
-                break;
-            case 3:
-                nombreVehiculo = "Premium";
-                tarifaBase = 5.00;
-                costokm = 3.00;
-                break;
-            case 4:
-                nombreVehiculo = "Moto";
-                tarifaBase = 1.50;
-                costokm = 1.00;
-                break;
-            default:
-                Console.WriteLine("\nOpción no válida. Fin del programa.");
-                return;
+            Console.WriteLine("\nOpción no válida. Fin del programa.");
+            return;
         }
-
-        double subtotal = tarifaBase + (costokm * distancia);
-        bool esHoraPico = false;
-
-        esHoraPico = EsHoraPico(hora);
-        if (esHoraPico)
-        {
-            subtotal = subtotal * 1.30;
-        }
-
-        double descuento = 0;
-        if (distancia > 15)
-        {
-            descuento = subtotal * 0.05;
-            subtotal = subtotal - descuento;
-        }
-
-        double tarifaFinal = Math.Max(subtotal, 5.00);
-        tarifaFinal = Math.Round(tarifaFinal, 2);
-
         Console.WriteLine($"\nTARIFA FINAL: S/ {tarifaFinal}");
     }
 
     static bool EsHoraPico(int hora)
     {
         return (hora >= 7 && hora <= 9) || (hora >= 17 && hora <= 20);
+    }
+
+    static double CalcularTarifa(double distancia, int hora, int tipoVehiculo)
+    {
+        double tarifaBase = 0;
+        double costokm = 0;
+
+        switch (tipoVehiculo)
+        {
+            case 1:
+                tarifaBase = 2.00;
+                costokm = 1.50;
+                break;
+            case 2:
+                tarifaBase = 3.00;
+                costokm = 2.00;
+                break;
+            case 3:
+                tarifaBase = 5.00;
+                costokm = 3.00;
+                break;
+            case 4:
+                tarifaBase = 1.50;
+                costokm = 1.00;
+                break;
+            default:
+                return -1;
+        }
+
+        double subtotal = tarifaBase + costokm * distancia;
+
+        if (EsHoraPico(hora))
+        {
+            subtotal *= 1.30;
+        }
+
+        if (distancia > 15)
+        {
+            subtotal -= subtotal * 0.05;
+        }
+
+        return Math.Round(Math.Max(subtotal, 5.00), 2);
     }
 }
