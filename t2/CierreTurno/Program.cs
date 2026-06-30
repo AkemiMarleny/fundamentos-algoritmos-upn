@@ -8,32 +8,54 @@ class SimuladorTarifa
         Console.WriteLine("          InDrive Simulador de Tarifa    ");
         Console.WriteLine("=========================================\n");
 
-        Console.Write("Nombre del pasajero: ");
-        string nombre = Console.ReadLine();
+        Console.Write("Cantidad de viajes del conductor: ");
+        int n = int.Parse(Console.ReadLine());
 
-        Console.Write("Distancia del viaje (km): ");
-        double distancia = double.Parse(Console.ReadLine());
+        double[] tarifas = new double[n];
+        bool[] picoHora = new bool[n];
 
-        Console.Write("Hora de salida (0-23): ");
-        int hora = int.Parse(Console.ReadLine());
-
-        Console.WriteLine("\nTipo de vehículo:");
-        Console.WriteLine("1. Económico");
-        Console.WriteLine("2. Confort");
-        Console.WriteLine("3. Premium");
-        Console.WriteLine("4. Moto");
-
-        Console.Write("Seleccione opción: ");
-        int tipoVehiculo = int.Parse(Console.ReadLine());
-
-        if (!EsValido(distancia, hora, tipoVehiculo))
+        for (int i = 0; i < n; i++)
         {
-            Console.WriteLine("\nDatos inválidos.");
-            return;
+            Console.WriteLine($"\n--- Viaje #{i + 1} ---");
+
+            string nombre;
+            double distancia;
+            int hora, tipoVehiculo;
+            bool valido;
+
+            do
+            {
+                Console.Write("Nombre del pasajero: ");
+                nombre = Console.ReadLine();
+
+                Console.Write("Distancia del viaje (km): ");
+                distancia = double.Parse(Console.ReadLine());
+
+                Console.Write("Hora de salida (0-23): ");
+                hora = int.Parse(Console.ReadLine());
+
+                Console.Write("Tipo de vehículo (1-4): ");
+                tipoVehiculo = int.Parse(Console.ReadLine());
+
+                valido = EsValido(distancia, hora, tipoVehiculo);
+                if (!valido)
+                {
+                    Console.WriteLine("Datos inválidos. Intente nuevamente.");
+                }
+            } while (!valido);
+
+            picoHora[i] = EsHoraPico(hora);
+            tarifas[i] = CalcularTarifa(distancia, hora, tipoVehiculo);
+            Console.WriteLine($"TARIFA: S/ {tarifas[i]:F2}");
         }
 
-        double tarifaFinal = CalcularTarifa(distancia, hora, tipoVehiculo);
-        Console.WriteLine($"\nTARIFA FINAL: S/ {tarifaFinal}");
+        Console.WriteLine("\n========== RESUMEN DEL DÍA ==========");
+        Console.WriteLine($"Viajes realizados:    {n}");
+        Console.WriteLine($"Total ganado:         S/ {CalcularTotal(tarifas):F2}");
+        Console.WriteLine($"Tarifa promedio:      S/ {CalcularPromedio(tarifas):F2}");
+        Console.WriteLine($"Viaje más rentable:   S/ {EncontrarMaximo(tarifas):F2}");
+        Console.WriteLine($"Viaje más económico:  S/ {EncontrarMinimo(tarifas):F2}");
+        Console.WriteLine($"Viajes en hora pico:  {ContarHoraPico(picoHora)}");
     }
 
     static bool EsHoraPico(int hora)
@@ -88,5 +110,59 @@ class SimuladorTarifa
         return distancia > 0
             && hora >= 0 && hora <= 23
             && tipoVehiculo >= 1 && tipoVehiculo <= 4;
+    }
+
+    static double CalcularTotal(double[] tarifas)
+    {
+        double suma = 0;
+        for (int i = 0; i < tarifas.Length; i++)
+        {
+            suma += tarifas[i];
+        }
+        return suma;
+    }
+
+    static double CalcularPromedio(double[] tarifas)
+    {
+        return CalcularTotal(tarifas) / tarifas.Length;
+    }
+
+    static double EncontrarMaximo(double[] tarifas)
+    {
+        double max = tarifas[0];
+        for (int i = 1; i < tarifas.Length; i++)
+        {
+            if (tarifas[i] > max)
+            {
+                max = tarifas[i];
+            }
+        }
+        return max;
+    }
+
+    static double EncontrarMinimo(double[] tarifas)
+    {
+        double min = tarifas[0];
+        for (int i = 1; i < tarifas.Length; i++)
+        {
+            if (tarifas[i] < min)
+            {
+                min = tarifas[i];
+            }
+        }
+        return min;
+    }
+
+    static int ContarHoraPico(bool[] picoHora)
+    {
+        int count = 0;
+        for (int i = 0; i < picoHora.Length; i++)
+        {
+            if (picoHora[i])
+            {
+                count++;
+            }
+        }
+        return count;
     }
 }
