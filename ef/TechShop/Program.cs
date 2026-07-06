@@ -77,7 +77,7 @@ void RegistrarProducto(ref string[] codigos, ref string[] nombres, ref double[] 
 {
     Console.WriteLine("REGISTRAR PRODUCTO");
 
-    string codigo = LeerCodigo(ref codigos);
+    string codigo = LeerCodigoNoExistente(ref codigos);
     string nombre = LeerNombre();
     double precio = LeerPrecio();
     int stock = LeerStockInicial();
@@ -172,7 +172,7 @@ string LeerNombre()
     return nombre;
 }
 
-string LeerCodigo(ref string[] codigos)
+string LeerCodigoNoExistente(ref string[] codigos)
 {
     string codigo = "";
     bool codigoValido = false;
