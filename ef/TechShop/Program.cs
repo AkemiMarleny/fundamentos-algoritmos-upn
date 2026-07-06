@@ -28,7 +28,7 @@
                 BuscarProductoPorCodigo(ref codigos, ref nombres, ref precios, ref stocks);
                 break;
             case 4:
-                ActualizarStockProducto();
+                ActualizarStockProducto(ref codigos, ref stocks);
                 break;
             case 5:
                 OrdenarCatalogoPrecio();
@@ -59,7 +59,37 @@ void InsertarProductoEnPosicion() { }
 
 void OrdenarCatalogoPrecio() { }
 
-void ActualizarStockProducto() { }
+void ActualizarStockProducto(ref string[] codigos, ref int[] stocks)
+{
+    Console.WriteLine("ACTUALIZAR STOCK");
+
+    string codigo = LeerCodigo();
+    int indiceProducto = BuscarIndicePorCodigo(codigo, ref codigos);
+    if (indiceProducto == -1)
+    {
+        Console.WriteLine("Error: Producto con código no encontrado");
+        return;
+    }
+
+    Console.WriteLine("Ingrese la cantidad a actualizar (positivo para sumar, negativo para restar): ");
+    int cantidad = 0;
+    if (!int.TryParse(Console.ReadLine(), out cantidad))
+    {
+        Console.WriteLine("Error: Cantidad no válida");
+        return;
+    }
+
+    int nuevoStock = stocks[indiceProducto] + cantidad;
+    if (nuevoStock < 0)
+    {
+        Console.WriteLine("Error: El nuevo stock no puede quedar negativo. Operación rechazada.");
+    }
+    else
+    {
+        stocks[indiceProducto] = nuevoStock;
+        Console.WriteLine("Stock actualizado satisfactoriamente");
+    }
+}
 
 void BuscarProductoPorCodigo(ref string[] codigos, ref string[] nombres, ref double[] precios, ref int[] stocks)
 {
