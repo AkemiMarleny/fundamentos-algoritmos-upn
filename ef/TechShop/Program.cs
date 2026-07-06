@@ -9,40 +9,44 @@
     int cantidadProductos = 0;
 
 
-    int opcionSeleccionada = SolicitarOpcion();
-    switch (opcionSeleccionada)
+    int opcionSeleccionada = 0;
+    do
     {
-        case 0:
-            SalirPrograma();
-            break;
-        case 1:
-            RegistrarProducto(ref codigos, ref nombres, ref precios, ref stocks, ref cantidadProductos);
-            break;
-        case 2:
-            MostrarCatalogoProductos();
-            break;
-        case 3:
-            BuscarProductoPorCodigo();
-            break;
-        case 4:
-            ActualizarStockProducto();
-            break;
-        case 5:
-            OrdenarCatalogoPrecio();
-            break;
-        case 6:
-            InsertarProductoEnPosicion();
-            break;
-        case 7:
-            EliminarProductoPorCodigo();
-            break;
-        case 8:
-            OrdernarCatalogoPorNombreAlfabetico();
-            break;
-        case 9:
-            DemostracionParametroValorReferencia();
-            break;
-    }
+        opcionSeleccionada = SolicitarOpcion();
+        switch (opcionSeleccionada)
+        {
+            case 0:
+                SalirPrograma();
+                break;
+            case 1:
+                RegistrarProducto(ref codigos, ref nombres, ref precios, ref stocks, ref cantidadProductos);
+                break;
+            case 2:
+                MostrarCatalogoProductos(ref codigos, ref nombres, ref precios, ref stocks, ref cantidadProductos);
+                break;
+            case 3:
+                BuscarProductoPorCodigo();
+                break;
+            case 4:
+                ActualizarStockProducto();
+                break;
+            case 5:
+                OrdenarCatalogoPrecio();
+                break;
+            case 6:
+                InsertarProductoEnPosicion();
+                break;
+            case 7:
+                EliminarProductoPorCodigo();
+                break;
+            case 8:
+                OrdernarCatalogoPorNombreAlfabetico();
+                break;
+            case 9:
+                DemostracionParametroValorReferencia();
+                break;
+        }
+    } while (opcionSeleccionada != 0);
 }
 
 void DemostracionParametroValorReferencia() { }
@@ -59,13 +63,20 @@ void ActualizarStockProducto() { }
 
 void BuscarProductoPorCodigo() { }
 
-void MostrarCatalogoProductos()
+void MostrarCatalogoProductos(ref string[] codigos, ref string[] nombres, ref double[] precios, ref int[] stocks, ref int cantidadProductos)
 {
-    // TODO 
+    Console.WriteLine("CATÁLOGO DE PRODUCTOS");
+
+    for (int i = 0; i < cantidadProductos; i++)
+    {
+        Console.WriteLine($"{i}  Codigo: {codigos[i]}  |  Nombre: {nombres[i]}  |  Precio: {precios[i]}  |  Stock: {stocks[i]}");
+    }
 }
 
 void RegistrarProducto(ref string[] codigos, ref string[] nombres, ref double[] precios, ref int[] stocks, ref int cantidadProductos)
 {
+    Console.WriteLine("REGISTRAR PRODUCTO");
+
     string codigo = LeerCodigo(ref codigos);
     string nombre = LeerNombre();
     double precio = LeerPrecio();
