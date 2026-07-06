@@ -6,7 +6,7 @@
     string[] nombres = new string[maxProductos];
     double[] precios = new double[maxProductos];
     int[] stocks = new int[maxProductos];
-    // heap
+    int cantidadProductos = 0;
 
 
     int opcionSeleccionada = SolicitarOpcion();
@@ -16,7 +16,7 @@
             SalirPrograma();
             break;
         case 1:
-            RegistrarProducto(ref codigos, ref nombres, ref precios, ref stocks);
+            RegistrarProducto(ref codigos, ref nombres, ref precios, ref stocks, ref cantidadProductos);
             break;
         case 2:
             MostrarCatalogoProductos();
@@ -64,13 +64,21 @@ void MostrarCatalogoProductos()
     // TODO 
 }
 
-void RegistrarProducto(ref string[] codigos, ref string[] nombres, ref double[] precios, ref int[] stocks)
+void RegistrarProducto(ref string[] codigos, ref string[] nombres, ref double[] precios, ref int[] stocks, ref int cantidadProductos)
 {
     string codigo = LeerCodigo(ref codigos);
     string nombre = LeerNombre();
     double precio = LeerPrecio();
-    double stock = LeerStockInicial();
+    int stock = LeerStockInicial();
 
+    codigos[cantidadProductos] = codigo;
+    nombres[cantidadProductos] = nombre;
+    precios[cantidadProductos] = precio;
+    stocks[cantidadProductos] = stock;
+
+    cantidadProductos++;
+
+    Console.WriteLine("Producto registrado satisfactoriamente");
 }
 
 
