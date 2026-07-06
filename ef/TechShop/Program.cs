@@ -1,5 +1,14 @@
 ﻿void Main()
 {
+    int maxProductos = 20;
+
+    string[] codigos = new string[maxProductos];
+    string[] nombres = new string[maxProductos];
+    double[] precios = new double[maxProductos];
+    int[] stocks = new int[maxProductos];
+    // heap
+
+
     int opcionSeleccionada = SolicitarOpcion();
     switch (opcionSeleccionada)
     {
@@ -7,7 +16,7 @@
             SalirPrograma();
             break;
         case 1:
-            RegistrarProducto();
+            RegistrarProducto(ref codigos, ref nombres, ref precios, ref stocks);
             break;
         case 2:
             MostrarCatalogoProductos();
@@ -55,9 +64,139 @@ void MostrarCatalogoProductos()
     // TODO 
 }
 
-void RegistrarProducto()
+void RegistrarProducto(ref string[] codigos, ref string[] nombres, ref double[] precios, ref int[] stocks)
 {
-    // TODO
+    string codigo = LeerCodigo(ref codigos);
+    string nombre = LeerNombre();
+    double precio = LeerPrecio();
+    double stock = LeerStockInicial();
+
+}
+
+
+int LeerStockInicial()
+{
+    int stock = 0;
+    bool stockValido = false;
+    do
+    {
+        Console.WriteLine("Ingrese stock: ");
+        if (!int.TryParse(Console.ReadLine(), out stock))
+        {
+            Console.WriteLine("Error: Stock no válido");
+            stockValido = false;
+        }
+        else if (stock < 0)
+        {
+            Console.WriteLine("Error: Stock debería ser mayor que cero");
+            stockValido = false;
+        }
+        else
+        {
+            stockValido = true;
+        }
+    }
+    while (stockValido == false);
+
+    return stock;
+}
+
+
+double LeerPrecio()
+{
+    double precio = 0.0;
+    bool precioValido = false;
+    do
+    {
+        Console.WriteLine("Ingrese precio: ");
+        if (!double.TryParse(Console.ReadLine(), out precio))
+        {
+            Console.WriteLine("Error: Precio no válido");
+            precioValido = false;
+        }
+        else if (precio <= 0)
+        {
+            Console.WriteLine("Error: Precio deberia ser mayor que cero");
+            precioValido = false;
+        }
+        else
+        {
+            precioValido = true;
+        }
+    }
+    while (precioValido == false);
+
+    return precio;
+}
+
+
+string LeerNombre()
+{
+    string nombre = "";
+    bool nombreValido = false;
+    do
+    {
+        Console.WriteLine("Ingrese nombre: ");
+        nombre = Console.ReadLine().Trim();
+        if (string.IsNullOrEmpty(nombre))
+        {
+            Console.WriteLine("Error: Nombre no deberia estar vacio");
+            nombreValido = false;
+        }
+        else
+        {
+            nombreValido = true;
+        }
+    }
+    while (nombreValido == false);
+
+    return nombre;
+}
+
+string LeerCodigo(ref string[] codigos)
+{
+    string codigo = "";
+    bool codigoValido = false;
+    do
+    {
+        Console.WriteLine("Ingrese código: ");
+        codigo = Console.ReadLine().Trim();
+        if (string.IsNullOrEmpty(codigo))
+        {
+            Console.WriteLine("Error: Código no deberia estar vacio");
+            codigoValido = false;
+        }
+        else if (BuscarIndicePorCodigo(codigo, ref codigos) != -1)
+        {
+            Console.WriteLine("Error: El código ya existe.");
+        }
+        else
+        {
+            codigoValido = true;
+        }
+    }
+    while (codigoValido == false);
+
+    return codigo;
+}
+
+int BuscarIndicePorCodigo(string codigo, ref string[] codigos)
+{
+    for (int i = 0; i < codigos.Length; i++)
+    {
+        string codigoVal = codigos[i];
+        if (codigoVal is null)
+        {
+            continue;
+        }
+
+        if (codigoVal.Equals(codigo, StringComparison.OrdinalIgnoreCase))
+        {
+            return i;
+        }
+    }
+
+    return -1;
 }
 
 void SalirPrograma()
