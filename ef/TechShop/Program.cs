@@ -25,7 +25,7 @@
                 MostrarCatalogoProductos(ref codigos, ref nombres, ref precios, ref stocks, ref cantidadProductos);
                 break;
             case 3:
-                BuscarProductoPorCodigo();
+                BuscarProductoPorCodigo(ref codigos, ref nombres, ref precios, ref stocks);
                 break;
             case 4:
                 ActualizarStockProducto();
@@ -61,7 +61,21 @@ void OrdenarCatalogoPrecio() { }
 
 void ActualizarStockProducto() { }
 
-void BuscarProductoPorCodigo() { }
+void BuscarProductoPorCodigo(ref string[] codigos, ref string[] nombres, ref double[] precios, ref int[] stocks)
+{
+    Console.WriteLine("BUSCAR PRODUCTO POR CÓDIGO");
+
+    string codigo = LeerCodigo();
+    int indiceProducto = BuscarIndicePorCodigo(codigo, ref codigos);
+    if (indiceProducto == -1)
+    {
+        Console.WriteLine("Error: Producto con código no encontrado");
+    }
+    else
+    {
+        MostrarProductoEnLinea(indiceProducto, ref codigos, ref nombres, ref precios, ref stocks);
+    }
+}
 
 void MostrarCatalogoProductos(ref string[] codigos, ref string[] nombres, ref double[] precios, ref int[] stocks, ref int cantidadProductos)
 {
@@ -69,8 +83,14 @@ void MostrarCatalogoProductos(ref string[] codigos, ref string[] nombres, ref do
 
     for (int i = 0; i < cantidadProductos; i++)
     {
-        Console.WriteLine($"{i}  Codigo: {codigos[i]}  |  Nombre: {nombres[i]}  |  Precio: {precios[i]}  |  Stock: {stocks[i]}");
+        MostrarProductoEnLinea(i, ref codigos, ref nombres, ref precios, ref stocks);
     }
+}
+
+void MostrarProductoEnLinea(int indiceProducto, ref string[] codigos, ref string[] nombres, ref double[] precios, ref int[] stocks)
+{
+    Console.WriteLine($"{indiceProducto}  Codigo: {codigos[indiceProducto]}  |  Nombre: {nombres[indiceProducto]}  |  Precio: {precios[indiceProducto]}  |  Stock: {stocks[indiceProducto]}");
+
 }
 
 void RegistrarProducto(ref string[] codigos, ref string[] nombres, ref double[] precios, ref int[] stocks, ref int cantidadProductos)
@@ -198,6 +218,31 @@ string LeerCodigoNoExistente(ref string[] codigos)
 
     return codigo;
 }
+
+
+string LeerCodigo()
+{
+    string codigo = "";
+    bool codigoValido = false;
+    do
+    {
+        Console.WriteLine("Ingrese código: ");
+        codigo = Console.ReadLine().Trim();
+        if (string.IsNullOrEmpty(codigo))
+        {
+            Console.WriteLine("Error: Código no deberia estar vacio");
+            codigoValido = false;
+        }
+        else
+        {
+            codigoValido = true;
+        }
+    }
+    while (codigoValido == false);
+
+    return codigo;
+}
+
 
 int BuscarIndicePorCodigo(string codigo, ref string[] codigos)
 {
