@@ -49,7 +49,35 @@
     } while (opcionSeleccionada != 0);
 }
 
-void DemostracionParametroValorReferencia() { }
+void DemostracionParametroValorReferencia()
+{
+    Console.WriteLine("DEMOSTRACIÓN: PARÁMETRO POR VALOR VS. POR REFERENCIA");
+    Console.WriteLine();
+
+    Console.WriteLine("1. double - Paso por valor:");
+    double precioOriginal = 150.50;
+    Console.WriteLine($"   Antes: {precioOriginal}");
+    DuplicarValor(precioOriginal);
+    Console.WriteLine($"   Después: {precioOriginal}  → NO cambia porque se pasa una copia");
+    Console.WriteLine();
+
+    Console.WriteLine("2. int[] - Paso por referencia (ref):");
+    int[] arregloOriginal = { 1, 2, 3 };
+    Console.WriteLine($"   Antes: [{string.Join(", ", arregloOriginal)}]");
+    ReemplazarArray(ref arregloOriginal);
+    Console.WriteLine($"   Después: [{string.Join(", ", arregloOriginal)}]  → SÍ cambia porque con ref se reasigna la variable original");
+}
+
+void DuplicarValor(double x)
+{
+    x = x * 2;
+    Console.WriteLine($"   (Dentro del método: {x})");
+}
+
+void ReemplazarArray(ref int[] arr)
+{
+    arr = new int[] { 10, 20, 30 };
+}
 
 void OrdernarCatalogoPorNombreAlfabetico(ref string[] codigos, ref string[] nombres, ref double[] precios, ref int[] stocks, ref int cantidadProductos)
 {
