@@ -40,7 +40,7 @@
                 EliminarProductoPorCodigo(ref codigos, ref nombres, ref precios, ref stocks, ref cantidadProductos);
                 break;
             case 8:
-                OrdernarCatalogoPorNombreAlfabetico();
+                OrdernarCatalogoPorNombreAlfabetico(ref codigos, ref nombres, ref precios, ref stocks, ref cantidadProductos);
                 break;
             case 9:
                 DemostracionParametroValorReferencia();
@@ -51,7 +51,43 @@
 
 void DemostracionParametroValorReferencia() { }
 
-void OrdernarCatalogoPorNombreAlfabetico() { }
+void OrdernarCatalogoPorNombreAlfabetico(ref string[] codigos, ref string[] nombres, ref double[] precios, ref int[] stocks, ref int cantidadProductos)
+{
+    Console.WriteLine("ORDENAR CATÁLOGO POR NOMBRE (ALFABÉTICO)");
+
+    if (cantidadProductos == 0)
+    {
+        Console.WriteLine("El catálogo está vacío. No hay productos que ordenar.");
+        return;
+    }
+
+    for (int i = 0; i < cantidadProductos - 1; i++)
+    {
+        for (int j = 0; j < cantidadProductos - 1 - i; j++)
+        {
+            if (string.Compare(nombres[j], nombres[j + 1], StringComparison.OrdinalIgnoreCase) > 0)
+            {
+                string tempNombre = nombres[j];
+                nombres[j] = nombres[j + 1];
+                nombres[j + 1] = tempNombre;
+
+                string tempCodigo = codigos[j];
+                codigos[j] = codigos[j + 1];
+                codigos[j + 1] = tempCodigo;
+
+                double tempPrecio = precios[j];
+                precios[j] = precios[j + 1];
+                precios[j + 1] = tempPrecio;
+
+                int tempStock = stocks[j];
+                stocks[j] = stocks[j + 1];
+                stocks[j + 1] = tempStock;
+            }
+        }
+    }
+
+    Console.WriteLine("Catálogo ordenado por nombre alfabéticamente.");
+}
 
 void EliminarProductoPorCodigo(ref string[] codigos, ref string[] nombres, ref double[] precios, ref int[] stocks, ref int cantidadProductos)
 {
