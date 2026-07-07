@@ -474,7 +474,7 @@ int BuscarIndicePorCodigo(string codigo, ref string[] codigos)
 
 void SalirPrograma()
 {
-    // TODO
+    return;
 }
 
 int SolicitarOpcion()
