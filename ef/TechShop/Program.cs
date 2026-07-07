@@ -31,7 +31,7 @@
                 ActualizarStockProducto(ref codigos, ref stocks);
                 break;
             case 5:
-                OrdenarCatalogoPrecio();
+                OrdenarCatalogoPrecio(ref codigos, ref nombres, ref precios, ref stocks, ref cantidadProductos);
                 break;
             case 6:
                 InsertarProductoEnPosicion();
@@ -57,7 +57,43 @@ void EliminarProductoPorCodigo() { }
 
 void InsertarProductoEnPosicion() { }
 
-void OrdenarCatalogoPrecio() { }
+void OrdenarCatalogoPrecio(ref string[] codigos, ref string[] nombres, ref double[] precios, ref int[] stocks, ref int cantidadProductos)
+{
+    Console.WriteLine("ORDENAR CATÁLOGO POR PRECIO");
+
+    if (cantidadProductos == 0)
+    {
+        Console.WriteLine("El catálogo está vacío. No hay productos que ordenar.");
+        return;
+    }
+
+    for (int i = 0; i < cantidadProductos - 1; i++)
+    {
+        for (int j = 0; j < cantidadProductos - 1 - i; j++)
+        {
+            if (precios[j] > precios[j + 1])
+            {
+                double tempPrecio = precios[j];
+                precios[j] = precios[j + 1];
+                precios[j + 1] = tempPrecio;
+
+                string tempCodigo = codigos[j];
+                codigos[j] = codigos[j + 1];
+                codigos[j + 1] = tempCodigo;
+
+                string tempNombre = nombres[j];
+                nombres[j] = nombres[j + 1];
+                nombres[j + 1] = tempNombre;
+
+                int tempStock = stocks[j];
+                stocks[j] = stocks[j + 1];
+                stocks[j + 1] = tempStock;
+            }
+        }
+    }
+
+    Console.WriteLine("Catálogo ordenado por precio de menor a mayor.");
+}
 
 void ActualizarStockProducto(ref string[] codigos, ref int[] stocks)
 {
