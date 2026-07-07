@@ -37,7 +37,7 @@
                 InsertarProductoEnPosicion(ref codigos, ref nombres, ref precios, ref stocks, ref cantidadProductos);
                 break;
             case 7:
-                EliminarProductoPorCodigo();
+                EliminarProductoPorCodigo(ref codigos, ref nombres, ref precios, ref stocks, ref cantidadProductos);
                 break;
             case 8:
                 OrdernarCatalogoPorNombreAlfabetico();
@@ -53,7 +53,41 @@ void DemostracionParametroValorReferencia() { }
 
 void OrdernarCatalogoPorNombreAlfabetico() { }
 
-void EliminarProductoPorCodigo() { }
+void EliminarProductoPorCodigo(ref string[] codigos, ref string[] nombres, ref double[] precios, ref int[] stocks, ref int cantidadProductos)
+{
+    Console.WriteLine("ELIMINAR PRODUCTO POR CÓDIGO");
+
+    if (cantidadProductos == 0)
+    {
+        Console.WriteLine("Error: El catálogo está vacío. No hay productos para eliminar.");
+        return;
+    }
+
+    string codigo = LeerCodigo();
+    int indiceProducto = BuscarIndicePorCodigo(codigo, ref codigos);
+    if (indiceProducto == -1)
+    {
+        Console.WriteLine("Error: Producto con código no encontrado");
+        return;
+    }
+
+    for (int i = indiceProducto; i < cantidadProductos - 1; i++)
+    {
+        codigos[i] = codigos[i + 1];
+        nombres[i] = nombres[i + 1];
+        precios[i] = precios[i + 1];
+        stocks[i] = stocks[i + 1];
+    }
+
+    codigos[cantidadProductos - 1] = null;
+    nombres[cantidadProductos - 1] = null;
+    precios[cantidadProductos - 1] = 0;
+    stocks[cantidadProductos - 1] = 0;
+
+    cantidadProductos--;
+
+    Console.WriteLine("Producto eliminado satisfactoriamente.");
+}
 
 void InsertarProductoEnPosicion(ref string[] codigos, ref string[] nombres, ref double[] precios, ref int[] stocks, ref int cantidadProductos)
 {
