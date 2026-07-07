@@ -34,7 +34,7 @@
                 OrdenarCatalogoPrecio(ref codigos, ref nombres, ref precios, ref stocks, ref cantidadProductos);
                 break;
             case 6:
-                InsertarProductoEnPosicion();
+                InsertarProductoEnPosicion(ref codigos, ref nombres, ref precios, ref stocks, ref cantidadProductos);
                 break;
             case 7:
                 EliminarProductoPorCodigo();
@@ -55,7 +55,52 @@ void OrdernarCatalogoPorNombreAlfabetico() { }
 
 void EliminarProductoPorCodigo() { }
 
-void InsertarProductoEnPosicion() { }
+void InsertarProductoEnPosicion(ref string[] codigos, ref string[] nombres, ref double[] precios, ref int[] stocks, ref int cantidadProductos)
+{
+    Console.WriteLine("INSERTAR PRODUCTO EN POSICIÓN ESPECÍFICA");
+
+    if (cantidadProductos >= codigos.Length)
+    {
+        Console.WriteLine("Error: El catálogo está lleno. No se pueden insertar más productos.");
+        return;
+    }
+
+    Console.WriteLine("Ingrese la posición donde desea insertar el producto (0 a " + cantidadProductos + "): ");
+    int posicion = 0;
+    if (!int.TryParse(Console.ReadLine(), out posicion))
+    {
+        Console.WriteLine("Error: Posición no válida.");
+        return;
+    }
+
+    if (posicion < 0 || posicion > cantidadProductos)
+    {
+        Console.WriteLine("Error: La posición debe estar entre 0 y " + cantidadProductos + ".");
+        return;
+    }
+
+    string codigo = LeerCodigoNoExistente(ref codigos);
+    string nombre = LeerNombre();
+    double precio = LeerPrecio();
+    int stock = LeerStockInicial();
+
+    for (int i = cantidadProductos; i > posicion; i--)
+    {
+        codigos[i] = codigos[i - 1];
+        nombres[i] = nombres[i - 1];
+        precios[i] = precios[i - 1];
+        stocks[i] = stocks[i - 1];
+    }
+
+    codigos[posicion] = codigo;
+    nombres[posicion] = nombre;
+    precios[posicion] = precio;
+    stocks[posicion] = stock;
+
+    cantidadProductos++;
+
+    Console.WriteLine("Producto insertado satisfactoriamente en la posición " + posicion + ".");
+}
 
 void OrdenarCatalogoPrecio(ref string[] codigos, ref string[] nombres, ref double[] precios, ref int[] stocks, ref int cantidadProductos)
 {
